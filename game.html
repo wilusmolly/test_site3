@@ -15,14 +15,13 @@
         }   
        
     </style>
+    <script src="./GameObject.js"></script>
+    <script src="./Ship.js"></script>
     <script>
         //함수란? 재사용가능성이 높은 코드영역에 이름
         //을 붙인 단위로 필요할때마다 호출해서 쓴다 
         var bgX=0;//배경을 조절하는 변수
         var wrapper;
-        var ship;
-        var x=0; //우주선의 x좌표
-        var y=0; //우주선의 y좌표
 
         function init(){            //문서내의 wrapper 의 배경의 x좌표값을 감소
 
@@ -47,23 +46,7 @@
         }
         //우주선 등장 함수!!!
         function createShip(){
-            //기존에 없던 태그 요소를 생성하여, wrapper
-            //안에 자식 요소로 부착하자!!
-            ship=document.createElement("img");
-            ship.src="./images/ship.png";        
-            ship.style.width=200+"px";
-
-            //absolute 란? 가장 근접한 부모 요소를 기준으로
-            //한 위치값 속성
-            //relative 란? 현재 자신이 위치한 normal 포지션
-            //을 기준으로 한 위치값
-            ship.style.position="absolute";
-            ship.style.left=x+"px"; //x축 
-            ship.style.top=y+"px"; //y축
-            
-            //메모리에 생성된 img DOM을 wrapper안에 부착
-            wrapper.appendChild(ship);                
-
+            var ship=new Ship(wrapper,100, 150, 100,65,15,15,"./images/ship.png");
         }
         function control(){
             var key=event.keyCode;

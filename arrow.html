@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>화살 날리기</title>
     <script src="./Arrow.js"></script>
+    <script src="./Bullet.js"></script>
     <script>
+        var array=new Array();//배열생성!!!
+
         window.addEventListener("load", function(){
             //존재하지 않던, 화살을 생성하여 body 붙이자!!
             createArrow();
@@ -18,12 +21,20 @@
         function createArrow(){
             //이미 정의된 거부집인 클래스로부터 인스턴스 한개를 생성
             for(var i=0;i<100;i++){
-                var arr=new Arrow(i*30);
-                setInterval(function(){
-                    arr.move();
-                }, 100);
+                //var arr=new Arrow(i*30);
+                var bullet=new Bullet(i*30);
+                array.push(bullet);//순서대로 채워넣음..
             }
+            ani();//동작함수 호출!!            
         }
+        function ani(){
+            //배열의 길이 만큼...
+            for(var i=0;i<array.length;i++){
+                array[i].move();
+            }
+            setTimeout("ani()",100);
+        }
+
     </script>        
 </head>
 <body>

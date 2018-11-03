@@ -5,34 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>화살 날리기</title>
+    <script src="./Arrow.js"></script>
     <script>
-        var span;
-        var x=0;
-        var y=0;
-
         window.addEventListener("load", function(){
             //존재하지 않던, 화살을 생성하여 body 붙이자!!
             createArrow();
 
             //setTimeout과는 달리, 지정한 시간 간격으로
             //끝없이 함수를 호출...
-            setInterval("move()", 100);
+            
         });
-
         function createArrow(){
-            span=document.createElement("span");
-            span.innerText="→";
-            span.style.position="absolute";
-            span.style.left=x+"px";
-            span.style.top=y+"px";
-            document.body.appendChild(span);
-        }
-        //움직이기
-        function move(){
-            x+=10; //x = x + 10;
-           
-            span.style.left=x+"px";
-            span.style.top=y+"px";
+            //이미 정의된 거부집인 클래스로부터 인스턴스 한개를 생성
+            for(var i=0;i<100;i++){
+                var arr=new Arrow(i*30);
+                setInterval(function(){
+                    arr.move();
+                }, 100);
+            }
         }
     </script>        
 </head>

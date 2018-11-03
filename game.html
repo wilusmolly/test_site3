@@ -12,29 +12,75 @@
             width:100%;
             height:650px;
             background:url("./images/bg.jpg");
-        }        
+        }   
+       
     </style>
     <script>
         //함수란? 재사용가능성이 높은 코드영역에 이름
         //을 붙인 단위로 필요할때마다 호출해서 쓴다 
-        var x=0;
+        var bgX=0;//배경을 조절하는 변수
+        var wrapper;
+        var ship;
+        var x=0; //우주선의 x좌표
+        var y=0; //우주선의 y좌표
+
         function init(){            //문서내의 wrapper 의 배경의 x좌표값을 감소
 
             //메모리에 올라온 여러 DOM 중 하나를 선택
             //하기 위한 메서드 사용...
-            var wrapper=document.getElementById("wrapper");
-            wrapper.style.backgroundPosition=x+"px 0px";
+            wrapper=document.getElementById("wrapper");
+            wrapper.style.backgroundPosition=bgX+"px 0px";
+            createShip();
+            bgMove();
         }        
         function bgMove(){
             //전역변수 x의 값을 점점 감소시켜보자!!
-            x=x-10; //대입연산자....
-            wrapper.style.backgroundPosition=x+"px 0px";
+            bgX=bgX-10; //대입연산자....
+            wrapper.style.backgroundPosition=bgX+"px 0px";
+
+            //주의할점: setTimeout과 setInterval 비교..
+            setTimeout("bgMove()" ,100);
+        }
+        //우주선 등장 함수!!!
+        function createShip(){
+            //기존에 없던 태그 요소를 생성하여, wrapper
+            //안에 자식 요소로 부착하자!!
+            ship=document.createElement("img");
+            ship.src="./images/ship.png";        
+            ship.style.width=200+"px";
+
+            //absolute 란? 가장 근접한 부모 요소를 기준으로
+            //한 위치값 속성
+            //relative 란? 현재 자신이 위치한 normal 포지션
+            //을 기준으로 한 위치값
+            ship.style.position="absolute";
+            ship.style.left=x+"px"; //x축 
+            ship.style.top=y+"px"; //y축
+            
+            //메모리에 생성된 img DOM을 wrapper안에 부착
+            wrapper.appendChild(ship);                
+
+        }
+        function control(){
+            var key=event.keyCode;
+            
+            if(key == 37){
+                x=x-5;
+            }else if(key == 39){
+                x=x+5;
+            }else if(key == 38){
+                y=y-5;
+            }else if(key == 40){
+                y=y+5;
+            }
+            ship.style.left=x+"px"; //x축
+            ship.style.top=y+"px"; //x축
         }
     </script>        
 </head>
 
-<body onLoad="init()">
-    <div id="wrapper" onClick="bgMove()">배경나올곳</div>
+<body onLoad="init()" onKeyDown="control()">
+    <div id="wrapper"></div>
 </body>
 
 </html>

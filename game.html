@@ -32,11 +32,15 @@
             wrapper.style.backgroundPosition=bgX+"px 0px";
             createShip();
             bgMove();
+            createArrow();//화살 생성!!
         }        
         function bgMove(){
             //전역변수 x의 값을 점점 감소시켜보자!!
             bgX=bgX-10; //대입연산자....
             wrapper.style.backgroundPosition=bgX+"px 0px";
+
+            ship.style.left=x+"px"; //x축
+            ship.style.top=y+"px"; //x축
 
             //주의할점: setTimeout과 setInterval 비교..
             setTimeout("bgMove()" ,100);
@@ -72,9 +76,10 @@
                 y=y-5;
             }else if(key == 40){
                 y=y+5;
+            }else if(key==32){//스페이스 바 누르면 총알 발사!!
+
             }
-            ship.style.left=x+"px"; //x축
-            ship.style.top=y+"px"; //x축
+
         }
     </script>        
 </head>
